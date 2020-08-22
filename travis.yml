@@ -1,0 +1,16 @@
+sudo: required
+services:
+    - docker
+
+after_success:
+    - docker build -t namratabhadauriya/multi-client ./client
+    - docker build -t namratabhadauriya/multi-nginx ./nginx
+    - docker build -t namratabhadauriya/multi-server ./server
+    - docker build -t namratabhadauriya/multi-worker ./worker
+    # login to the docker cli
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # take those images and push them to docker hub
+    - docker push namratabhadauriya/multi-client
+    - docker push namratabhadauriya/multi-nginx
+    - docker push namratabhadauriya/multi-server
+    - docker push namratabhadauriya/multi-worker
