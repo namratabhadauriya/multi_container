@@ -1,7 +1,6 @@
 sudo: required
 services:
     - docker
-
 after_success:
     - docker build -t namratabhadauriya/multi-client ./client
     - docker build -t namratabhadauriya/multi-nginx ./nginx
